@@ -80,6 +80,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
            cargoStatus.textContent = "Cargo mass too high for launch";
             const launchStatus = document.getElementById("launchStatus");
             launchStatus.textContent = "Shuttle not ready for launch";
+            //launchStatus.style.color = "red";
             launchStatus.style.color = "red";
             return; 
         }
