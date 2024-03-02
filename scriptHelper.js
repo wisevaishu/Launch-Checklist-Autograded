@@ -3,18 +3,18 @@
 require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
-                     <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
-                 </ol>
-                 <img src="">
-    */
+    const missionTargetDiv = document.getElementById("missionTarget");
+    missionTargetDiv.innerHTML = `
+    <h2>Mission Destination</h2>
+    <ol>
+        <li>Name: ${name}</li>
+        <li>Diameter: ${diameter}</li>
+        <li>Star: ${star}</li>
+        <li>Distance from Earth: ${distance}</li>
+        <li>Number of Moons: ${moons}</li>
+    </ol>
+    <img src="${imageUrl}">
+    `;
  }
  
  function validateInput(testInput) {
@@ -35,16 +35,25 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     const validateFuelLevel = validateInput(fuelLevel);
     const validateCargoLevel = validateInput(cargoLevel);
 
-    console.log(validatePilot);
-    console.log(validateCoPilot);
-    console.log(validateFuelLevel);
-    console.log(validateCargoLevel);
+    // if ( validatePilot === "Empty" || validatePilot !== "Not a Number" ||
+    //     validateCoPilot === "Empty" || validateCoPilot !== "Not a Number" ||
+    //     validateFuelLevel !== "Is a Number" || validateCargoLevel !== "Is a Number") 
+    // {
+    //     alert("All fields are required!");
+    //     return;
+    // }
 
-    if ( validatePilot === "Empty" || validatePilot !== "Not a Number" ||
-        validateCoPilot === "Empty" || validateCoPilot !== "Not a Number" ||
-        validateFuelLevel !== "Is a Number" || validateCargoLevel !== "Is a Number") 
+    if (validatePilot === "Empty" || validateCoPilot === "Empty" ||
+        validateFuelLevel === "Empty" || validateCargoLevel === "Empty")
     {
         alert("All fields are required!");
+        return;
+    }
+
+    if (validatePilot !== "Not a Number" || validateCoPilot !== "Not a Number" || 
+        validateFuelLevel !== "Is a Number" || validateCargoLevel !== "Is a Number")
+    {
+        alert("Make sure to enter valid information for each field!");
         return;
     }
    
@@ -84,11 +93,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  async function myFetch() {
-    let planetsReturned;
-    planetsReturned=await fetch("https://handlers.education.launchcode.org/static/planets.json");
-    return planetsReturned;
+    const response = await fetch("https://handlers.education.launchcode.org/static/planets.json");
+    return response.json();
 }
-
  
  function pickPlanet(planets) {
    
