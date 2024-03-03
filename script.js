@@ -18,12 +18,14 @@ window.addEventListener("load", function() {
     });
        
     let form = document.querySelector("form[data-testid=testForm]");
+
         form.addEventListener("submit", function(event) {
             event.preventDefault();
             let pilotNameInput = document.querySelector("input[name=pilotName]");
             let copilotNameInput = document.querySelector("input[name=copilotName]");
             let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
             let cargoMassInput = document.querySelector("input[name=cargoMass]");
-            formSubmission(document, null, pilotNameInput.value, copilotNameInput.value, fuelLevelInput.value, cargoMassInput.value);           
+            list = document.getElementById("faultyItems");
+            formSubmission(document, list, pilotNameInput.value, copilotNameInput.value, fuelLevelInput.value, cargoMassInput.value);           
     });
 });

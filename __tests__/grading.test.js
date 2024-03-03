@@ -84,6 +84,8 @@ describe('Test student work on helper functions', () => {
       expect(studentFunctions.validateInput("10")).toEqual("Is a Number");
    });
 
+
+   
    test('List is properly initialized', () => {
       expect(list).not.toBeVisible(); 
       expect(h2).toHaveTextContent("Awaiting Information Before Launch");
